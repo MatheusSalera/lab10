@@ -1,4 +1,4 @@
-<!-- views/admin.ejs -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,7 +9,6 @@
 <body>
   <h2>Gerenciar Carros</h2>
 
-  <!-- Formulário de Cadastro -->
   <h3>Cadastrar Novo Carro</h3>
   <form action="/carros/novo" method="POST">
     <input name="marca" placeholder="Marca" required />
@@ -21,7 +20,7 @@
 
   <hr>
 
-  <!-- Listagem de carros -->
+ 
   <h3>Lista de Carros</h3>
   <ul>
     <% carros.forEach(carro => { %>
@@ -29,12 +28,12 @@
         <strong><%= carro.marca %> <%= carro.modelo %> (<%= carro.ano %>)</strong> - 
         Quantidade: <%= carro.qtde_disponivel > 0 ? carro.qtde_disponivel : "Esgotado" %>
 
-        <!-- Botão de Vender -->
+        
         <form action="/carros/vender/<%= carro._id %>" method="POST" style="display:inline;">
           <button type="submit" <%= carro.qtde_disponivel === 0 ? "disabled" : "" %>>Vender</button>
         </form>
 
-        <!-- Formulário de Atualizar -->
+        
         <details>
           <summary>Atualizar</summary>
           <form action="/carros/editar/<%= carro._id %>" method="POST">
@@ -46,7 +45,6 @@
           </form>
         </details>
 
-        <!-- Botão de Remover -->
         <form action="/carros/remover/<%= carro._id %>" method="POST" style="display:inline;">
           <button type="submit">Remover</button>
         </form>
