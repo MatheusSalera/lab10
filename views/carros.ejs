@@ -1,0 +1,7 @@
+<!-- views/carros.ejs -->
+<h2>Carros Disponíveis</h2>
+<ul>
+  <% carros.forEach(carro => { %>
+    <li><%= carro.marca %> <%= carro.modelo %> (<%= carro.ano %>) - <%= carro.qtde_disponivel > 0 ? carro.qtde_disponivel : 'Esgotado' %></li>
+  <% }) %>
+</ul>

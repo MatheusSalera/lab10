@@ -1,0 +1,57 @@
+<!-- views/admin.ejs -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciar Carros</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h2>Gerenciar Carros</h2>
+
+  <!-- Formulário de Cadastro -->
+  <h3>Cadastrar Novo Carro</h3>
+  <form action="/carros/novo" method="POST">
+    <input name="marca" placeholder="Marca" required />
+    <input name="modelo" placeholder="Modelo" required />
+    <input name="ano" type="number" placeholder="Ano" required />
+    <input name="qtde_disponivel" type="number" placeholder="Quantidade" required />
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <hr>
+
+  <!-- Listagem de carros -->
+  <h3>Lista de Carros</h3>
+  <ul>
+    <% carros.forEach(carro => { %>
+      <li>
+        <strong><%= carro.marca %> <%= carro.modelo %> (<%= carro.ano %>)</strong> - 
+        Quantidade: <%= carro.qtde_disponivel > 0 ? carro.qtde_disponivel : "Esgotado" %>
+
+        <!-- Botão de Vender -->
+        <form action="/carros/vender/<%= carro._id %>" method="POST" style="display:inline;">
+          <button type="submit" <%= carro.qtde_disponivel === 0 ? "disabled" : "" %>>Vender</button>
+        </form>
+
+        <!-- Formulário de Atualizar -->
+        <details>
+          <summary>Atualizar</summary>
+          <form action="/carros/editar/<%= carro._id %>" method="POST">
+            <input name="marca" value="<%= carro.marca %>" required />
+            <input name="modelo" value="<%= carro.modelo %>" required />
+            <input name="ano" type="number" value="<%= carro.ano %>" required />
+            <input name="qtde_disponivel" type="number" value="<%= carro.qtde_disponivel %>" required />
+            <button type="submit">Atualizar</button>
+          </form>
+        </details>
+
+        <!-- Botão de Remover -->
+        <form action="/carros/remover/<%= carro._id %>" method="POST" style="display:inline;">
+          <button type="submit">Remover</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
