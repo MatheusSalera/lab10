@@ -1,11 +1,17 @@
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const routes = require("./routes/index");
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://mspittar:<db_password>@projetos.qrfo6xo.mongodb.net/?retryWrites=true&w=majority&appName=Projetos', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://localhost:27017/carrosdb");
 
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('
+app.use("/", routes);
 
-::contentReference[oaicite:0]{index=0}
- 
+app.listen(80, () => {
+  console.log("Servidor rodando na porta 80");
+});
